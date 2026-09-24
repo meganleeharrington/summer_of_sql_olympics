@@ -1,5 +1,6 @@
-select current_database();
+CREATE DATABASE olympics;
 use olympics;
+
 CREATE TABLE staging (
 	id varchar(1000),
     name varchar(1000),
@@ -19,4 +20,5 @@ CREATE TABLE staging (
 	noc_region varchar(1000),
 	noc_notes varchar(1000)
 );
+
 select * from staging;
