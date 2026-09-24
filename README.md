@@ -16,4 +16,6 @@ This project comes from the first half of Will Sutton's [Olympics challenge](htt
 - [SQL script](https://github.com/meganleeharrington/summer_of_sql_olympics/blob/main/create_smaller_tables.sql) to create smaller tables
 - [ER Diagrams](https://github.com/meganleeharrington/summer_of_sql_olympics/blob/main/olympics-erd.png)
 
+
+
 <img width="655" height="474" alt="olympics-erd" src="https://github.com/user-attachments/assets/96e63740-92a4-4361-a55f-698fdcd557bd" />
