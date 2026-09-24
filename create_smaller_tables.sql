@@ -1,9 +1,3 @@
-use olympics;
-
-select *
-from staging;
-
-
 --atheletes table
 DROP TABLE athletes;
 CREATE TABLE athletes (
@@ -14,9 +8,6 @@ CREATE TABLE athletes (
     weight varchar(255)
 );
 
-select *
-from athletes;
-
 INSERT INTO athletes (athlete_id, name, sex, height, weight) 
 SELECT DISTINCT id
     ,name
@@ -25,15 +16,17 @@ SELECT DISTINCT id
     ,weight
 from staging;
 
+select *
+from athletes;
+
+
+
 --events table
 CREATE TABLE events (
     event_id INT PRIMARY KEY,
     event VARCHAR(255),
     sport VARCHAR(255)
 );
-
-select *
-from events;
 
 INSERT INTO events (event_id, event, sport) 
 SELECT ROW_NUMBER() OVER (ORDER BY event) AS event_id
@@ -44,6 +37,11 @@ FROM
         ,sport 
     FROM staging) AS unique_events;
 
+select *
+from events;
+
+
+
 --teams table
 CREATE TABLE teams(
     team_id INT PRIMARY KEY,
@@ -52,9 +50,6 @@ CREATE TABLE teams(
     NOC_region VARCHAR(255),
     NOC_notes VARCHAR(1000)
 );
-
-SELECT *
-from teams;
 
 INSERT INTO teams (team_id, team, NOC, NOC_region, NOC_notes)
 SELECT ROW_NUMBER() OVER (ORDER BY team) AS team_id
@@ -69,6 +64,11 @@ FROM
         ,NOC_notes 
     FROM staging) AS unique_teams;
 
+SELECT *
+from teams;
+
+
+
 --games table
 CREATE TABLE games (
     games_id INT PRIMARY KEY,
@@ -77,9 +77,6 @@ CREATE TABLE games (
     season VARCHAR(255),
     city VARCHAR(255)
 );
-
-SELECT *
-from games;
 
 INSERT INTO games (games_id, year, games, season, city)
 SELECT ROW_NUMBER() OVER (ORDER BY year, games) AS games_id
@@ -94,6 +91,11 @@ FROM
         ,city 
     FROM staging) AS unique_games;
 
+SELECT *
+from games;
+
+
+
 --results table
 DROP TABLE results;
 
@@ -105,9 +107,6 @@ CREATE TABLE results (
     event_id INT,
     medal VARCHAR(255)
 );
-
-SELECT *
-from results;
 
 INSERT INTO results (athlete_id, athlete_age, team_id, games_id, event_id, medal)
 select s.id as athlete_id
@@ -121,6 +120,11 @@ left join teams as t on s.team = t.team and s.NOC = t.NOC
 left join games as g on s.games = g.games and s.city = g.city
 left join events as e on s.event = e.event
 ;
+
+SELECT *
+from results;
+
+
 
 -- Add Foreign Keys
 ALTER TABLE results ADD FOREIGN KEY (athlete_id) REFERENCES athletes(athlete_id);
